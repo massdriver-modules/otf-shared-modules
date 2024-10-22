@@ -32,8 +32,9 @@ jobs:
         run: |
           for dir in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Validating: $dir"
-            cd $dir
+            push $dir
             tofu init
             tofu fmt -check
             tofu validate
+            pop
           done

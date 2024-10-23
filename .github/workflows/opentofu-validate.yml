@@ -6,9 +6,8 @@ on:
       - main
 
 jobs:
-  changed_files:
+  opentofu-validate:
     runs-on: ubuntu-latest 
-    name: Test changed-files
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1        

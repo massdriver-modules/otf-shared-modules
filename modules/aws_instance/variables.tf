@@ -4,7 +4,7 @@ variable "name_prefix" {
 }
 
 variable "description" {
-  description = "Description for the security group"
+  description = "Description of the security group"
   type        = string
   default     = "OpenTofu Foundations internet access for EC2 instance"
 }

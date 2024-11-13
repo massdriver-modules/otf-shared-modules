@@ -3,6 +3,11 @@ variable "name_prefix" {
   type        = string
 }
 
+variable "enable_versioning" {
+  type        = bool
+  description = "Enable bucket versioning"
+}
+
 resource "random_string" "suffix" {
   length  = 4
   special = false
@@ -11,6 +16,14 @@ resource "random_string" "suffix" {
 
 resource "aws_s3_bucket" "main" {
   bucket = "${var.name_prefix}-opentofu-state-${random_string.suffix.result}"
+}
+
+resource "aws_s3_bucket_versioning" "state_versioning" {
+  count  = var.enable_versioning ? 1 : 0
+  bucket = aws_s3_bucket.main.bucket
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
 resource "aws_dynamodb_table" "main" {

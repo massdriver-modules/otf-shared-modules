@@ -37,6 +37,16 @@ resource "aws_dynamodb_table" "main" {
   }
 }
 
+output "bucket_name" {
+  description = "Name of the s3 bucket"
+  value       = aws_s3_bucket.main.bucket
+}
+
+output "dynamodb_table_name" {
+  description = "Name of the dynamodb table used for locking"
+  value       = aws_dynamodb_table.main.name
+}
+
 output "usage" {
   description = "Example state backend configuration"
   value       = <<EOF
